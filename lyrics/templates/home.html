@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search artist</title>
+</head>
+<body>
+    <form method="GET">
+        {{ form.as_p }}
+
+        <button type="submit">Search</button>
+    </form>
+
+    {% for track in tracks_list %}
+    <ul>
+        <li>{{ track }}</li>
+    </ul>
+    {% endfor %}
+    <br>
+    <a href="{% url 'lyrics:get_lyrics' %}">Get lyrics by track id</a>
+</body>
+</html>
