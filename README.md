@@ -1,7 +1,7 @@
 # genius_api_django_project
 
 ## A small mini-project.
-The Genius API was used for the project.
+The Genius API was used for the project. (https://genius.com/)
 
 ## How it works:  
   
