@@ -5,6 +5,9 @@ The Genius API was used for the project. (https://genius.com/)
   
 If you want to try to build by your own or test my project,
 get a free api you can here - https://rapidapi.com/Glavier/api/genius-song-lyrics1/pricing  
+
+## UPDATED: 
+added new feature - after getting search result you can click on link that stands near every popular track and go to lyrics directly  
   
 ## How it works:  
   
