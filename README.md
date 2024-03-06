@@ -1,8 +1,11 @@
 # genius_api_django_project
 
 ## A small mini-project.
-The Genius API was used for the project. (https://genius.com/)
-
+The Genius API was used for the project. (https://genius.com/)  
+  
+If you want to try to build by your own or test my project,
+get a free api you can here - https://rapidapi.com/Glavier/api/genius-song-lyrics1/pricing  
+  
 ## How it works:  
   
   

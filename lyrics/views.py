@@ -1,7 +1,13 @@
 from django.shortcuts import render
 import requests
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
 from .forms import SearchForm, GetLyricsForm
+
+
+GENIUS_API_KEY = os.getenv('GENIUS_API_KEY')
 
 
 def search_artist(request):
@@ -14,26 +20,30 @@ def search_artist(request):
         querystring = {"q":f"{key}","per_page":"10","page":"1"}
 
         headers = {
-            "X-RapidAPI-Key": "df55fa19a6mshd70b63331cfb2cep14f329jsn16f472d61208",
+            "X-RapidAPI-Key": GENIUS_API_KEY, # get your own api - https://rapidapi.com/Glavier/api/genius-song-lyrics1/pricing
             "X-RapidAPI-Host": "genius-song-lyrics1.p.rapidapi.com"
         }
 
         response = requests.get(url, headers=headers, params=querystring).json()
 
-        tracks_list = []
+        tracks = {}
         for result in response['hits']:
             track = result['result']
             name = track['full_title']
             id = track['id']
             res = f"- {name}, id: {id}"
-            tracks_list.append(res)
-        
-        return render(request, 'home.html', {'tracks_list': tracks_list, 'form': form})
+            id = int(id)
+            tracks[id] = res
     
-    return render(request, 'home.html', {'form': form})
+    else:
+        tracks = {}
+        
+    return render(request, 'home.html', {'tracks': tracks, 'form': form})
+    
+    # return render(request, 'home.html', {'form': form})
 
 
-def get_lyrics(request):
+def get_lyrics(request, track_id):
     form = GetLyricsForm()
     key = request.GET.get('track_id')
 
@@ -43,13 +53,36 @@ def get_lyrics(request):
         querystring = {"id":f"{key}"}
 
         headers = {
-            "X-RapidAPI-Key": "df55fa19a6mshd70b63331cfb2cep14f329jsn16f472d61208",
+            "X-RapidAPI-Key": GENIUS_API_KEY, # get your own api - https://rapidapi.com/Glavier/api/genius-song-lyrics1/pricing
             "X-RapidAPI-Host": "genius-song-lyrics1.p.rapidapi.com"
         }
 
         response = requests.get(url, headers=headers, params=querystring).json()
         lyrics = response['lyrics']['lyrics']['body']['html']
 
+        # clean_html = re.sub(r'<a.*?>(.*?)</a>', r'\1', lyrics)
+
+        # modified_content = re.sub(r'<a\s+([^>]*)>', r'<p \1>', lyrics)
+        # modified_content = modified_content.replace("</a>", "</p>")
+        # modified_content = modified_content.replace("</p><br>", "</p>")
+
         return render(request, 'lyrics.html', {'lyrics': lyrics, 'form': form})
     
     return render(request, 'lyrics.html', {'form': form})
+
+
+def get_lyrics_link(request, track_id):
+
+    url = "https://genius-song-lyrics1.p.rapidapi.com/song/lyrics/"
+
+    querystring = {"id":f"{track_id}"}
+
+    headers = {
+        "X-RapidAPI-Key": GENIUS_API_KEY, # get your own api - https://rapidapi.com/Glavier/api/genius-song-lyrics1/pricing
+        "X-RapidAPI-Host": "genius-song-lyrics1.p.rapidapi.com"
+    }
+
+    response = requests.get(url, headers=headers, params=querystring).json()
+    lyrics = response['lyrics']['lyrics']['body']['html']
+
+    return render(request, 'lyrics_view.html', {'lyrics': lyrics})
