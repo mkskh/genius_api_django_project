@@ -1,0 +1,106 @@
+.text-link {
+text-decoration: none; 
+color: inherit;
+}
+body {
+    background-color: #FAFAFA;
+    font-family: "Nunito Sans", sans-serif;
+    padding-top: 50px;
+}
+
+.container {
+    max-width: 950px;
+    margin: auto;
+    padding: 10px;
+    background-color: #fff;
+    -webkit-box-shadow: 2px 2px 13px -4px rgba(0, 0, 0, 0.21);
+    box-shadow: 2px 2px 13px -4px rgba(0, 0, 0, 0.21);
+    text-align: center;
+}
+
+a,
+p {
+    color: black;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    padding: 0px;
+    margin: 10px;
+}
+.text-bg-secondary {
+    color: #fff !important;
+    background-color: RGBA(108, 117, 125, var(--bs-bg-opacity, 1)) !important;
+}
+.btn {
+    display: inline-block;
+    padding: 0.5em 1em;
+    border: none;
+    border-radius: 0.25em;
+    background-color: #ccc; 
+    color: #fff; 
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #999; 
+}
+
+.btn-secondary {
+    background-color: #666; 
+}
+
+.btn-secondary:hover {
+    background-color: #444; 
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+input[type="text"],
+input[type="password"],
+textarea,
+select {
+    width: 300px; 
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc; 
+    border-radius: 5px; 
+    box-sizing: border-box; 
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+textarea:focus,
+select:focus {
+    border-color: #999;
+}
+
+input[type="submit"] {
+    background-color: #007bff; 
+    color: #fff; 
+    border: none;
+    border-radius: 5px; 
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+    background-color: #0056b3; 
+}

@@ -11,6 +11,7 @@ GENIUS_API_KEY = os.getenv('GENIUS_API_KEY')
 
 
 def search_artist(request):
+    '''Write artist and get top10 tracks '''
     form = SearchForm()
     key = request.GET.get('search')
 
@@ -27,6 +28,7 @@ def search_artist(request):
         response = requests.get(url, headers=headers, params=querystring).json()
 
         tracks = {}
+
         for result in response['hits']:
             track = result['result']
             name = track['full_title']
@@ -34,17 +36,19 @@ def search_artist(request):
             res = f"- {name}, id: {id}"
             id = int(id)
             tracks[id] = res
-        print(response)
+
         artist = response['hits'][0]['result']['artist_names']
 
         return render(request, 'home.html', {'tracks': tracks, 'form': form, 'artist': artist})
 
     else:
         tracks = {}
+
         return render(request, 'home.html', {'tracks': tracks, 'form': form})
 
 
 def get_lyrics(request):
+    '''Enter track ID and get the lyrics'''
     form = GetLyricsForm()
     key = request.GET.get('track_id')
 
@@ -61,10 +65,6 @@ def get_lyrics(request):
         response = requests.get(url, headers=headers, params=querystring).json()
         lyrics = response['lyrics']['lyrics']['body']['html']
 
-        # clean_html = re.sub(r'<a.*?>(.*?)</a>', r'\1', lyrics)
-
-        # modified_content = re.sub(r'<a\s+([^>]*)>', r'<p \1>', lyrics)
-        # modified_content = modified_content.replace("</a>", "</p>")
         modified_content = lyrics.replace('href', 'class="text-link" href')
 
         artist = response['lyrics']['tracking_data']['primary_artist']
@@ -78,7 +78,7 @@ def get_lyrics(request):
 
 
 def get_lyrics_link(request, track_id):
-
+    '''Click View and got directly to the lyrics'''
     url = "https://genius-song-lyrics1.p.rapidapi.com/song/lyrics/"
 
     querystring = {"id":f"{track_id}"}
