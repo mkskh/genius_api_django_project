@@ -12,11 +12,15 @@
     <button type="submit" class="btn btn-secondary">Search</button>
 </form>
 
-{% for track_id, value in tracks.items %}
-    <p>{{ value }} <a href="{% url 'lyrics:lyrics_view' track_id %}">View</a></p>
-{% endfor %}
-<br>
-<a href="{% url 'lyrics:get_lyrics' %}">Get lyrics by track id</a>
+{% if tracks %}
+    <br>
+    <h4>Top10 {{ artist }} tracks:</h4>
+    {% for track_id, value in tracks.items %}
+        <p>{{ value }} <a href="{% url 'lyrics:lyrics_view' track_id %}">View</a></p>
+    {% endfor %}
+    <br>
+    <a href="{% url 'lyrics:get_lyrics' %}">Get lyrics by track id</a>
+{% endif %}
 <br>
 <br>
 

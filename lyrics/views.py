@@ -34,13 +34,14 @@ def search_artist(request):
             res = f"- {name}, id: {id}"
             id = int(id)
             tracks[id] = res
-    
+        print(response)
+        artist = response['hits'][0]['result']['artist_names']
+
+        return render(request, 'home.html', {'tracks': tracks, 'form': form, 'artist': artist})
+
     else:
         tracks = {}
-        
-    return render(request, 'home.html', {'tracks': tracks, 'form': form})
-    
-    # return render(request, 'home.html', {'form': form})
+        return render(request, 'home.html', {'tracks': tracks, 'form': form})
 
 
 def get_lyrics(request):
