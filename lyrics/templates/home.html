@@ -1,25 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search artist</title>
-</head>
-<body>
-    <form method="GET">
-        {{ form.as_p }}
+{% extends 'base.html' %}
 
-        <button type="submit">Search</button>
-    </form>
+{% block content %}
 
-    {% for track_id, value in tracks.items %}
-    <ul>
-        <li>{{ value }} <a href="{% url 'lyrics:lyrics_view' track_id %}">View</a></li>
-    </ul>
-    {% endfor %}
-    <br>
-    <a href="{% url 'lyrics:get_lyrics' %}">Get lyrics by track id</a>
-    <br>
-    <br>
-</body>
-</html>
+<h2>Welcome to the Genius Lyrics API App</h2>
+<br>
+<form method="GET">
+
+    {{ form.as_p }}
+
+    <button type="submit" class="btn btn-secondary">Search</button>
+</form>
+
+{% for track_id, value in tracks.items %}
+    <p>{{ value }} <a href="{% url 'lyrics:lyrics_view' track_id %}">View</a></p>
+{% endfor %}
+<br>
+<a href="{% url 'lyrics:get_lyrics' %}">Get lyrics by track id</a>
+<br>
+<br>
+
+{% endblock content %}

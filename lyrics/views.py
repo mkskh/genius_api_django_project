@@ -43,7 +43,7 @@ def search_artist(request):
     # return render(request, 'home.html', {'form': form})
 
 
-def get_lyrics(request, track_id):
+def get_lyrics(request):
     form = GetLyricsForm()
     key = request.GET.get('track_id')
 
@@ -64,9 +64,14 @@ def get_lyrics(request, track_id):
 
         # modified_content = re.sub(r'<a\s+([^>]*)>', r'<p \1>', lyrics)
         # modified_content = modified_content.replace("</a>", "</p>")
-        # modified_content = modified_content.replace("</p><br>", "</p>")
+        modified_content = lyrics.replace('href', 'class="text-link" href')
 
-        return render(request, 'lyrics.html', {'lyrics': lyrics, 'form': form})
+        artist = response['lyrics']['tracking_data']['primary_artist']
+        track = response['lyrics']['tracking_data']['title']
+
+        name = f'{artist} - {track}'
+
+        return render(request, 'lyrics.html', {'lyrics': modified_content, 'form': form, 'name': name})
     
     return render(request, 'lyrics.html', {'form': form})
 
@@ -85,4 +90,11 @@ def get_lyrics_link(request, track_id):
     response = requests.get(url, headers=headers, params=querystring).json()
     lyrics = response['lyrics']['lyrics']['body']['html']
 
-    return render(request, 'lyrics_view.html', {'lyrics': lyrics})
+    modified_content = lyrics.replace('href', 'class="text-link" href')
+
+    artist = response['lyrics']['tracking_data']['primary_artist']
+    track = response['lyrics']['tracking_data']['title']
+
+    name = f'{artist} - {track}'
+
+    return render(request, 'lyrics_view.html', {'lyrics': modified_content, 'name': name})

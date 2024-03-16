@@ -1,20 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Get lyrics by track id</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block content %}
+
     <form method="GET">
         {{ form.as_p }}
 
-        <button type="submit">Get lyrics</button>
+        <button type="submit" class="btn btn-secondary">Get lyrics</button>
     </form>
-
+    <h1>{{ name }}</h1>
+    <br>
     {{ lyrics|safe }}
 
     <br>
     <a href="{% url 'lyrics:search_artist' %}">Go back</a>
-</body>
-</html>
+    
+{% endblock content %}
