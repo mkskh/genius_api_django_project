@@ -20,7 +20,7 @@ On the home page, enter any artist or band.
 
 ### Search result  
 After searching, the program will give you the top popular tracks by artist.  
-Just copy the track ID and go to the page "Get lyrics by track id". 
+Just copy the track ID and go to the page "Get lyrics by track id" or click "View" next to each track  
   
 ![home](./media/search.png)
 
