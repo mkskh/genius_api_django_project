@@ -2,16 +2,21 @@
 
 {% block content %}
 
-    <form method="GET">
-        {{ form.as_p }}
+<br>
+<h2>Get lyrics by track id</h2>
 
-        <button type="submit" class="btn btn-secondary">Get lyrics</button>
-    </form>
-    <h1>{{ name }}</h1>
-    <br>
-    {{ lyrics|safe }}
+<form method="GET">
+    {{ form.as_p }}
 
-    <br>
-    <a href="{% url 'lyrics:search_artist' %}">Go back</a>
+    <button type="submit" class="btn btn-secondary">Get lyrics</button>
+</form>
+
+<br>
+<h1>{{ name }}</h1>
+<br>
+{{ lyrics|safe }}
+
+<br>
+<a href="{% url 'lyrics:search_artist' %}">Go to main page</a>
     
 {% endblock content %}
